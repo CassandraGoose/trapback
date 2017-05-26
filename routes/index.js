@@ -1,11 +1,21 @@
 var express = require('express');
+var player = require('play-sound')(opts = {});
 var router = express.Router();
+
+
+// $ mplayer foo.mp3
+
 
 router.get('/', function(req, res, next) {
   console.log("HEY LISTEN")
-  console.log("how do i make it run a script here bruh");
-  // sudo chmod +x hello-world.sh
-  // sh play.sh
+  player.play('trap.mp3', function(err){
+    if (err) {
+      return next(err)
+    }
+    res.json({
+      message: 'the sound played.'
+    })
+  })
 });
 
 module.exports = router;
