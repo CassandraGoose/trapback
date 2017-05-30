@@ -3,12 +3,21 @@ var cors = require('cors');
 var index = require('./routes/index');
 var app = express();
 var https = require('https');
+var fs = require('fs');
 
 app.use(cors())
 
-// var httpsServer = https.createServer(stuff, app);
-
 app.use('/', index);
+
+var options = {
+  key: fs.readFileSync('key.pem'),
+  cert: fs.readFileSync('cert.pem')
+};
+
+https.createServer(options, function(req, res) {
+  res.writeHead(200);
+  res.end("hello world\n");
+}).listen(4000);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -25,7 +34,7 @@ app.use(function(err, req, res) {
   });
 });
 
-https.listen(4000, function () {
+app.listen(4000, function() {
   console.log('Example app listening on port 4000!')
 })
 
