@@ -6,12 +6,7 @@ var https = require('https');
 
 app.use(cors())
 
-var stuff = {
-  key: 'go',
-  cert: 'fuckyourself'
-}
-
-var httpsServer = https.createServer(stuff, app);
+// var httpsServer = https.createServer(stuff, app);
 
 app.use('/', index);
 
@@ -30,7 +25,7 @@ app.use(function(err, req, res) {
   });
 });
 
-httpsServer.listen(4000, function () {
+https.listen(4000, function () {
   console.log('Example app listening on port 4000!')
 })
 
