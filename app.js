@@ -6,7 +6,12 @@ var https = require('https');
 
 app.use(cors())
 
-var httpsServer = https.createServer(app);
+var stuff = {
+  key: 'go',
+  cert: 'fuckyourself'
+}
+
+var httpsServer = https.createServer(stuff, app);
 
 app.use('/', index);
 
