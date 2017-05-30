@@ -11,7 +11,7 @@ app.use('/', index);
 
 var options = {
   key: fs.readFileSync('key.pem'),
-  cert: fs.readFileSync('cert.pem')
+  cert: fs.readFile('cert.pem')
 };
 
 https.createServer(options, function(req, res) {
